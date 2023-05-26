@@ -2,6 +2,7 @@
 FROM node:lts-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
+RUN yarn config set ignore-engines true
 RUN yarn install
 COPY . .
 RUN yarn build

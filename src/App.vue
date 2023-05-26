@@ -78,12 +78,12 @@ export default {
     },
   },
   mounted() {
-    // this.$nextTick(() => {
-    //   navigator.geolocation.getCurrentPosition(position => {
-    //     const p = position.coords;
-    //     this.center = [p.latitude, p.longitude];
-    //   });
-    // });
+    this.$nextTick(() => {
+      navigator.geolocation.getCurrentPosition(position => {
+        const p = position.coords;
+        this.center = [p.latitude, p.longitude];
+      });
+    });
   },
 };
 </script>

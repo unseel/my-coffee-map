@@ -11,7 +11,7 @@
       ></l-tile-layer>
 
       <l-marker ref="location" :lat-lng="center">
-        <l-icon :icon-url="icon.type.gold"/>
+        <!-- <l-icon :icon-url="icon.type.gold"/> -->
         <l-popup>
           你的位置
         </l-popup>
@@ -35,7 +35,7 @@ import {
   LMarker,
   // LControlLayers,
   LPopup,
-  LIcon,
+  // LIcon,
   // LPolyline,
   // LPolygon,
   // LRectangle,
@@ -49,7 +49,7 @@ export default {
     LMarker,
     // LControlLayers,
     LPopup,
-    LIcon,
+    // LIcon,
     // LPolyline,
     // LPolygon,
     // LRectangle,

@@ -1,5 +1,5 @@
 FROM nginx:stable-alpine as production-stage
-COPY dist /usr/share/nginx/html
+ADD dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ADD run_nginx.sh /run_nginx.sh
 RUN chmod +x /run_nginx.sh

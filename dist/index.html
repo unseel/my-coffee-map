@@ -31,7 +31,7 @@
     <script>
         // 模擬資料
         const data = [
-            { name: "stanley咖啡", local: [30.289065, 120.034595] }
+            { name: "stanley咖啡", local: [30.289065, 120.034595], address: "浙江省杭州市余杭区五常街道西溪悦城26幢102室-1号" }
         ];
         // 設定地圖中心點與放大倍率
         const map = L.map("myMap", {
@@ -79,12 +79,21 @@
             // 將標記點新增於圖層
             markers.addLayer(
                 L.marker(item.local, {
-                    title: item.name,
+                    title: item.name + "\n" + item.address,
                     icon: myIcon
                 })
                     .addTo(map)
                     .bindPopup(item.name)
             );
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            navigator.geolocation.getCurrentPosition(position => {
+                const p = position.coords;
+                this.center = [p.latitude, p.longitude];
+                console.log(center);
+                map.setView(center);
+            });
         });
     </script>
 

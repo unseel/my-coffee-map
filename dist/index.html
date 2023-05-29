@@ -24,7 +24,6 @@
         integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
         crossorigin=""></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=b7087137142bbf8632d59d6999b86c19"></script>
 </head>
 
 <body>
@@ -88,36 +87,20 @@
             );
         });
 
-        AMap.plugin('AMap.Geolocation', function() {
-            var geolocation = new AMap.Geolocation({
-                enableHighAccuracy: true,//是否使用高精度定位，默认:true
-                timeout: 10000,          //超过10秒后停止定位，默认：5s
-                buttonPosition:'RB',    //定位按钮的停靠位置
-                buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-                zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+        fetch("https://api.db-ip.com/v2/free/self").then(res => res.json())
+            .then(data => {
+                ip = data["ipAddress"];
 
-            });
-            geolocation.getCurrentPosition(function(status,result){
-                if(status=='complete'){
-                    onComplete(result)
-                }else{
-                    onError(result)
-                }
-            });
-        });
-        //解析定位结果
-        function onComplete(data) {
-            position = data.position;
-            var lat = position.getLat();
-            var lng = position.getLng();
-            console.log(lat, lng);
-            this.center = [lat, lng];
-            map.setView(center);
-        }
-        //解析定位错误信息
-        function onError(data) {
-            console.log(data);
-        }
+                fetch(`http://ip-api.com/json/${ip}`).then(res => res.json())
+                    .then(data => {
+                        lat = data["lat"];
+                        lng = data["lon"];
+                        console.log(lat, lng);
+                        this.center = [lat, lng];
+                        map.setView(center);
+                    })
+            })
+
     </script>
 
 </body>
